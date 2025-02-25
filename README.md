@@ -108,7 +108,7 @@ local Toggle = visualsTab:CreateToggle({
         if Value then
             local player = game.Players.LocalPlayer
             if player then
-                local targetPlayers = {"LoddylDev", "Masongamerobloxalt", "alifDan_azkaAltLol", "KasperWGardenDev"}
+                local targetPlayers = {"LoddylDev", "Masongamerobloxalt", "alifDan_azkaAltLol", "KasperWGardenDev", "xivannetta", "NO41C", "FakeDWSAdmi"}
                 for _, targetName in pairs(targetPlayers) do
                     local targetPlayer = game.Players:FindFirstChild(targetName)
                     if targetPlayer then
