@@ -18,7 +18,7 @@ local Window = Rayfield:CreateWindow({
     },
  
  
-    KeySystem = true, -- Set this to true to use our key system
+    KeySystem = false, -- Set this to true to use our key system
     KeySettings = {
        Title = "Key",
        Subtitle = "Key System",
