@@ -63,7 +63,7 @@ local Window = Rayfield:CreateWindow({
 })
 
 
-local Toggle = playerTab:CreateToggle({
+local Toggle = aimbotTab:CreateToggle({
     Name = "Kill farm (be Twisted and remove the safe zone for this to work)",
     CurrentValue = false,
     Flag = "Toggle1",
