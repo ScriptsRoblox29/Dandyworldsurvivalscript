@@ -174,7 +174,11 @@ local Toggle = playerTab:CreateToggle({
         if player and player.Character then
             local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
             if humanoid then
-                humanoid.JumpPower = Value and 50 or humanoid.JumpPower
+                if Value then
+                    humanoid.JumpPower = 50
+                else
+                    humanoid.JumpPower = 0
+                end
             end
         end
     end,
