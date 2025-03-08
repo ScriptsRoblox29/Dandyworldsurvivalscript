@@ -63,42 +63,38 @@ local Window = Rayfield:CreateWindow({
 })
 
 
-
 local Toggle = aimbotTab:CreateToggle({
-    Name = "Kill farm (remove the safe zone and Get Twisted)",
+    Name = "Kill farm (remove the safe zone and Be a Twisted)",
     CurrentValue = false,
     Flag = "Toggle1",
     Callback = function(Value)
         local player = game.Players.LocalPlayer
         if player and player.Character then
-            local running = false
-
-            local function teleportToToon()
-                while running do
-                    wait(0.1)
-                    for _, obj in pairs(workspace:GetChildren()) do
-                        if obj:IsA("Model") then
-                            local toon = obj:FindFirstChild("Toon")
-                            if toon and toon:IsA("BoolValue") then
-                                local humanoidRootPart = obj:FindFirstChild("HumanoidRootPart")
-                                if humanoidRootPart and player.Character ~= obj then
-                                    player.Character:SetPrimaryPartCFrame(humanoidRootPart.CFrame)
+            if Value then
+                getgenv.TeleportActive = true
+                task.spawn(function()
+                    while getgenv.TeleportActive do
+                        task.wait(0.1)
+                        for _, obj in pairs(workspace:GetChildren()) do
+                            if obj:IsA("Model") and obj ~= player.Character then
+                                local toon = obj:FindFirstChild("Toon")
+                                if toon and toon:IsA("BoolValue") then
+                                    local hrp = obj:FindFirstChild("HumanoidRootPart")
+                                    if hrp then
+                                        player.Character:SetPrimaryPartCFrame(hrp.CFrame)
+                                    end
                                 end
                             end
                         end
                     end
-                end
-            end
-
-            if Value then
-                running = true
-                teleportToToon()
+                end)
             else
-                running = false
+                getgenv.TeleportActive = false
             end
         end
     end,
 })
+
  
  
  
