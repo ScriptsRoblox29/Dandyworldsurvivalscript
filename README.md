@@ -236,7 +236,7 @@ local Toggle = playerTab:CreateToggle({
 local Toggle = playerTab:CreateToggle({
     Name = "Noclip",
     CurrentValue = false,
-    Flag = "Toggle1",
+    Flag = "Toggle1", -- Flag
     Callback = function(Value)
         local player = game.Players.LocalPlayer
         if player and player.Character then
