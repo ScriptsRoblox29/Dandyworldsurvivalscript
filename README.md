@@ -63,15 +63,18 @@ local Window = Rayfield:CreateWindow({
 })
 
 
+
 local Toggle = aimbotTab:CreateToggle({
-    Name = "Kill farm (be Twisted and remove the safe zone for this to work)",
+    Name = "Kill farm (remove the safe zone and Get Twisted)",
     CurrentValue = false,
     Flag = "Toggle1",
     Callback = function(Value)
         local player = game.Players.LocalPlayer
         if player and player.Character then
+            local running = false
+
             local function teleportToToon()
-                while Value do
+                while running do
                     wait(0.1)
                     for _, obj in pairs(workspace:GetChildren()) do
                         if obj:IsA("Model") then
@@ -88,12 +91,14 @@ local Toggle = aimbotTab:CreateToggle({
             end
 
             if Value then
+                running = true
                 teleportToToon()
+            else
+                running = false
             end
         end
     end,
 })
- 
  
  
  
