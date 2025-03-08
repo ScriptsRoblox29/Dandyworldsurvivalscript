@@ -179,6 +179,54 @@ local Toggle = playerTab:CreateToggle({
         end
     end,
 })
+
+
+local Toggle = playerTab:CreateToggle({
+    Name = "platform",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+        local head = character:FindFirstChild("Head")
+
+        if character and humanoidRootPart and head then
+            if Value then
+                local platform = Instance.new("Part")
+                platform.Size = Vector3.new(5, 1, 5)
+                platform.Anchored = true
+                platform.BrickColor = BrickColor.new("White")
+                platform.Transparency = 0.5
+                platform.Name = player.Name .. "_Platform"
+                platform.Parent = workspace
+
+                local platformHeight = head.Position.Y + 3
+                platform.Position = Vector3.new(head.Position.X, platformHeight, head.Position.Z)
+
+                humanoidRootPart.CFrame = CFrame.new(humanoidRootPart.Position.X, platformHeight + 2, humanoidRootPart.Position.Z)
+
+                getgenv().FollowPlatform = true
+                task.spawn(function()
+                    while getgenv().FollowPlatform and platform do
+                        platform.Position = Vector3.new(
+                            humanoidRootPart.Position.X,
+                            platformHeight,
+                            humanoidRootPart.Position.Z
+                        )
+                        task.wait(0.05)
+                    end
+                end)
+            else
+                getgenv().FollowPlatform = false
+                local platform = workspace:FindFirstChild(player.Name .. "_Platform")
+                if platform then
+                    platform:Destroy()
+                end
+            end
+        end
+    end
+})
  
  
  getgenv().speed = {
@@ -196,3 +244,4 @@ local Toggle = playerTab:CreateToggle({
     Duration = 6.5,
     Image = 4483362458,
  })
+ 
