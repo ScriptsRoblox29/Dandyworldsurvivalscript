@@ -233,7 +233,6 @@ local Toggle = playerTab:CreateToggle({
 })
 
 
-
 local Toggle = playerTab:CreateToggle({
     Name = "Noclip",
     CurrentValue = false,
@@ -249,16 +248,16 @@ local Toggle = playerTab:CreateToggle({
                         if part == humanoidRootPart then
                             part.CanCollide = true
                         else
-                            part.CanCollide = not state
+                            part.CanCollide = false
                         end
                     end
                 end
             end
 
             if Value then
-                setNoclip(true)
-            else
                 setNoclip(false)
+            else
+                setNoclip(true)
             end
         end
     end,
