@@ -233,28 +233,32 @@ local Toggle = playerTab:CreateToggle({
 })
 
 
+
 local Toggle = playerTab:CreateToggle({
     Name = "Noclip",
     CurrentValue = false,
-    Flag = "Toggle1", -- Flag
+    Flag = "Toggle1",
     Callback = function(Value)
         local player = game.Players.LocalPlayer
         if player and player.Character then
-            local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
-            if humanoid then
-                local function setNoclip(state)
-                    for _, part in pairs(player.Character:GetChildren()) do
-                        if part:IsA("BasePart") then
+            local humanoidRootPart = player.Character:FindFirstChild("HumanoidRootPart")
+            
+            local function setNoclip(state)
+                for _, part in pairs(player.Character:GetChildren()) do
+                    if part:IsA("BasePart") then
+                        if part == humanoidRootPart then
+                            part.CanCollide = true
+                        else
                             part.CanCollide = not state
                         end
                     end
                 end
+            end
 
-                if Value then
-                    setNoclip(true)
-                else
-                    setNoclip(false)
-                end
+            if Value then
+                setNoclip(true)
+            else
+                setNoclip(false)
             end
         end
     end,
