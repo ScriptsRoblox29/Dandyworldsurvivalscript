@@ -64,7 +64,7 @@ local Window = Rayfield:CreateWindow({
 
 
 local Toggle = aimbotTab:CreateToggle({
-    Name = "Kill farm",
+    Name = "Kill farm (bugged, you can't disable it.)",
     CurrentValue = false,
     Flag = "Toggle1",
     Callback = function(Value)
