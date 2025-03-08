@@ -64,17 +64,17 @@ local Window = Rayfield:CreateWindow({
 
 
 local Toggle = aimbotTab:CreateToggle({
-    Name = "Kill farm (remove the safe zone and Be a Twisted)",
+    Name = "Kill farm",
     CurrentValue = false,
     Flag = "Toggle1",
     Callback = function(Value)
         local player = game.Players.LocalPlayer
+        local teleportActive = Value
         if player and player.Character then
-            if Value then
-                getgenv.TeleportActive = true
-                task.spawn(function()
-                    while getgenv.TeleportActive do
-                        task.wait(0.1)
+            if teleportActive then
+                spawn(function()
+                    while teleportActive do
+                        wait(0.1)
                         for _, obj in pairs(workspace:GetChildren()) do
                             if obj:IsA("Model") and obj ~= player.Character then
                                 local toon = obj:FindFirstChild("Toon")
@@ -89,7 +89,7 @@ local Toggle = aimbotTab:CreateToggle({
                     end
                 end)
             else
-                getgenv.TeleportActive = false
+                teleportActive = false
             end
         end
     end,
