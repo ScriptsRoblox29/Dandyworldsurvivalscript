@@ -231,6 +231,34 @@ local Toggle = playerTab:CreateToggle({
         end
     end
 })
+
+
+local Toggle = playerTab:CreateToggle({
+    Name = "Noclip",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        local player = game.Players.LocalPlayer
+        if player and player.Character then
+            local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                local function setNoclip(state)
+                    for _, part in pairs(player.Character:GetChildren()) do
+                        if part:IsA("BasePart") then
+                            part.CanCollide = not state
+                        end
+                    end
+                end
+
+                if Value then
+                    setNoclip(true)
+                else
+                    setNoclip(false)
+                end
+            end
+        end
+    end,
+})
  
  
  getgenv().speed = {
