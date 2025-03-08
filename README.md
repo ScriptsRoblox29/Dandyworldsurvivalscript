@@ -61,6 +61,38 @@ local Window = Rayfield:CreateWindow({
         end
     end,
 })
+
+
+local Toggle = playerTab:CreateToggle({
+    Name = "Kill farm (be Twisted and remove the safe zone for this to work)",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        local player = game.Players.LocalPlayer
+        if player and player.Character then
+            local function teleportToToon()
+                while Value do
+                    wait(0.1)
+                    for _, obj in pairs(workspace:GetChildren()) do
+                        if obj:IsA("Model") then
+                            local toon = obj:FindFirstChild("Toon")
+                            if toon and toon:IsA("BoolValue") then
+                                local humanoidRootPart = obj:FindFirstChild("HumanoidRootPart")
+                                if humanoidRootPart and player.Character ~= obj then
+                                    player.Character:SetPrimaryPartCFrame(humanoidRootPart.CFrame)
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+
+            if Value then
+                teleportToToon()
+            end
+        end
+    end,
+})
  
  
  
