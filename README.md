@@ -95,6 +95,58 @@ local Toggle = aimbotTab:CreateToggle({
     end,
 })
 
+
+local Button = aimbotTab:CreateButton({
+    Name = "make a random machine (not tested)",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local currentMap = workspace:FindFirstChild("CurrentMap")
+        if currentMap then
+            local generators = currentMap:FindFirstChild("Generators")
+            if generators then
+                local teleportDone = false
+                for _, machine in pairs(generators:GetChildren()) do
+                    if machine:IsA("Model") then
+                        local machinePart = machine:FindFirstChild("Machine")
+                        if machinePart then
+                            local machineDone = machinePart:FindFirstChild("MachineDone")
+                            if machineDone and machineDone:IsA("BoolValue") then
+                                if not machineDone.Value then
+                                    local promptPart = machinePart:FindFirstChild("Prompt")
+                                    if promptPart and promptPart:IsA("Part") then
+                                        local proximityPrompt = promptPart:FindFirstChild("ProximityPrompt")
+                                        if proximityPrompt and proximityPrompt.Enabled then
+                                            local character = player.Character
+                                            if character then
+                                                local canTeleport = true
+                                                for _, part in pairs(character:GetChildren()) do
+                                                    if part:IsA("BasePart") and part.Anchored then
+                                                        canTeleport = false
+                                                        break
+                                                    end
+                                                end
+
+                                                if canTeleport then
+                                                    character:SetPrimaryPartCFrame(promptPart.CFrame)
+                                                    proximityPrompt:InputHoldBegan()
+                                                    wait(0.2)
+                                                    proximityPrompt:InputEnded()
+                                                    teleportDone = true
+                                                    break
+                                                end
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end,
+})
+
  
  
  
@@ -302,4 +354,3 @@ local Toggle = playerTab:CreateToggle({
     Duration = 6.5,
     Image = 4483362458,
  })
- 
