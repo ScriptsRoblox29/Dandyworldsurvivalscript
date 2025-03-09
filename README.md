@@ -147,6 +147,82 @@ local Button = aimbotTab:CreateButton({
     end,
 })
 
+
+local Button = aimbotTab:CreateButton({
+    Name = "Collect Pops",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character.PrimaryPart then return end
+
+        local currentMap = workspace:FindFirstChild("CurrentMap")
+        if not currentMap then return end
+
+        local capsules = currentMap:FindFirstChild("Capsules")
+        if not capsules then return end
+
+        local pops = {}
+
+        for _, pop in pairs(capsules:GetChildren()) do
+            if pop:IsA("Model") and pop.Name == "Pop" then
+                local promptPart = pop:FindFirstChild("Prompt")
+                if promptPart and promptPart:IsA("Part") then
+                    local proximityPrompt = promptPart:FindFirstChild("ProximityPrompt")
+                    if proximityPrompt and proximityPrompt.Enabled then
+                        table.insert(pops, {part = promptPart, prompt = proximityPrompt})
+                    end
+                end
+            end
+        end
+
+        if #pops == 0 then return end
+
+        for _, pop in ipairs(pops) do
+            character:SetPrimaryPartCFrame(pop.part.CFrame)
+            fireproximityprompt(pop.prompt)
+            wait(0.5)
+        end
+    end,
+})
+
+
+local Button = aimbotTab:CreateButton({
+    Name = "Collect Chocolates",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character.PrimaryPart then return end
+
+        local currentMap = workspace:FindFirstChild("CurrentMap")
+        if not currentMap then return end
+
+        local capsules = currentMap:FindFirstChild("Capsules")
+        if not capsules then return end
+
+        local pops = {}
+
+        for _, pop in pairs(capsules:GetChildren()) do
+            if pop:IsA("Model") and pop.Name == "Chocolate" then
+                local promptPart = pop:FindFirstChild("Prompt")
+                if promptPart and promptPart:IsA("Part") then
+                    local proximityPrompt = promptPart:FindFirstChild("ProximityPrompt")
+                    if proximityPrompt and proximityPrompt.Enabled then
+                        table.insert(pops, {part = promptPart, prompt = proximityPrompt})
+                    end
+                end
+            end
+        end
+
+        if #pops == 0 then return end
+
+        for _, pop in ipairs(pops) do
+            character:SetPrimaryPartCFrame(pop.part.CFrame)
+            fireproximityprompt(pop.prompt)
+            wait(0.5)
+        end
+    end,
+})
+
  
  
  
