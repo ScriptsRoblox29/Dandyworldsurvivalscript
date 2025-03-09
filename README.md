@@ -187,7 +187,7 @@ local Button = aimbotTab:CreateButton({
 
 
 local Button = aimbotTab:CreateButton({
-    Name = "Collect Chocolates", -- name
+    Name = "Collect Chocolates",
     Callback = function()
         local player = game.Players.LocalPlayer
         local character = player.Character
@@ -199,31 +199,31 @@ local Button = aimbotTab:CreateButton({
         local capsules = currentMap:FindFirstChild("Capsules")
         if not capsules then return end
 
-        local pops = {}
+        local chocolates = {}
 
-        for _, pop in pairs(capsules:GetChildren()) do
-            if pop:IsA("Model") and pop.Name == "Chocolate" then
-                local promptPart = pop:FindFirstChild("Prompt")
+        for _, chocolate in pairs(capsules:GetChildren()) do
+            if chocolate:IsA("Model") and chocolate.Name == "Chocolate" then
+                local promptPart = chocolate:FindFirstChild("Prompt")
                 if promptPart and promptPart:IsA("Part") then
                     local proximityPrompt = promptPart:FindFirstChild("ProximityPrompt")
                     if proximityPrompt and proximityPrompt.Enabled then
-                        table.insert(pops, {part = promptPart, prompt = proximityPrompt})
+                        table.insert(chocolates, {part = promptPart, prompt = proximityPrompt})
                     end
                 end
             end
         end
 
-        if #pops == 0 then return end
+        if #chocolates == 0 then return end
 
-        for _, pop in ipairs(pops) do
-            character:SetPrimaryPartCFrame(pop.part.CFrame)
-            fireproximityprompt(pop.prompt)
+        for _, chocolate in ipairs(chocolates) do
+            character:SetPrimaryPartCFrame(chocolate.part.CFrame)
+            fireproximityprompt(chocolate.prompt)
             wait(0.5)
         end
     end,
 })
 
- 
+
  
  
  
