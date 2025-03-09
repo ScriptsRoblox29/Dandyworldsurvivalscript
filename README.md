@@ -187,7 +187,7 @@ local Button = aimbotTab:CreateButton({
 
 
 local Button = aimbotTab:CreateButton({
-    Name = "Collect Chocolates",
+    Name = "Collect Chocolates", -- name
     Callback = function()
         local player = game.Players.LocalPlayer
         local character = player.Character
