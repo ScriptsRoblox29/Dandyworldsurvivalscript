@@ -224,6 +224,44 @@ local Button = aimbotTab:CreateButton({
 })
 
 
+local Button = aimbotTab:CreateButton({
+    Name = "Collect All Items",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if not character or not character.PrimaryPart then return end
+
+        local currentMap = workspace:FindFirstChild("CurrentMap")
+        if not currentMap then return end
+
+        local capsules = currentMap:FindFirstChild("Capsules")
+        if not capsules then return end
+
+        local items = {}
+
+        for _, item in pairs(capsules:GetChildren()) do
+            if item:IsA("Model") and (item.Name == "ResearchCapsule" or item.Name == "HealthKit" or item.Name == "Chocolate" or item.Name == "Pop" or item.Name == "Bandage") then
+                local promptPart = item:FindFirstChild("Prompt")
+                if promptPart and promptPart:IsA("Part") then
+                    local proximityPrompt = promptPart:FindFirstChild("ProximityPrompt")
+                    if proximityPrompt and proximityPrompt.Enabled then
+                        table.insert(items, {part = promptPart, prompt = proximityPrompt})
+                    end
+                end
+            end
+        end
+
+        if #items == 0 then return end
+
+        for _, item in ipairs(items) do
+            character:SetPrimaryPartCFrame(item.part.CFrame)
+            fireproximityprompt(item.prompt)
+            wait(0.5)
+        end
+    end,
+})
+
+
  
  
  
