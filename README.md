@@ -314,6 +314,20 @@ local Button = aimbotTab:CreateButton({
 })
 
 
+local Button = aimbotTab:CreateButton({
+    Name = "vote for Classic mode",
+    Callback = function()
+        local args = {
+            [1] = 1,
+            [2] = 1
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("AddVoteEvent"):FireServer(unpack(args))
+    end,
+})
+
+
+
  
  
  
