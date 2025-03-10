@@ -394,6 +394,30 @@ local Button = aimbotTab:CreateButton({
     end,
 })
 
+
+local Button = aimbotTab:CreateButton({
+    Name = "activate the Auto Goob Ability (don't spam, click once every 0.75 seconds)",
+    Callback = function()
+        local args = {
+            [1] = game:GetService("ReplicatedStorage"):WaitForChild("UninfectedMorphs"):WaitForChild("Goob")
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(unpack(args))
+
+        wait(0.25)
+
+        local players = game:GetService("Players"):GetPlayers()
+        if #players > 1 then
+            local target = players[math.random(1, #players)]
+            if target and target.Character then
+                local abilityArgs = {
+                    [1] = target.Character
+                }
+                game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("GoobAbility"):FireServer(unpack(abilityArgs))
+            end
+        end
+    end,
+})
+
  
  
  
