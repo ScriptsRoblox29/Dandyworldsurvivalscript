@@ -262,6 +262,17 @@ local Button = aimbotTab:CreateButton({
 })
 
 
+local Button = aimbotTab:CreateButton({
+    Name = "Delete Void and Blocks that kill",
+    Callback = function()
+        local mapsWB = workspace:FindFirstChild("Maps_WB")
+        if mapsWB then
+            mapsWB:Destroy()
+        end
+    end,
+})
+
+
  
  
  
