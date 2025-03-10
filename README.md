@@ -263,11 +263,16 @@ local Button = aimbotTab:CreateButton({
 
 
 local Button = aimbotTab:CreateButton({
-    Name = "Delete Void and Blocks that kill",
+    Name = "Anti-Void (you will die if you go into the classic void of Roblox)",
     Callback = function()
         local mapsWB = workspace:FindFirstChild("Maps_WB")
         if mapsWB then
             mapsWB:Destroy()
+        end
+        
+        local workspaceStuff = workspace:FindFirstChild("WorkspaceStuff")
+        if workspaceStuff then
+            workspaceStuff:Destroy()
         end
     end,
 })
