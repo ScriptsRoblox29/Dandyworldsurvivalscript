@@ -501,6 +501,18 @@ local Button = aimbotTab:CreateButton({
         end
     end,
 })
+
+
+local Button = aimbotTab:CreateButton({
+    Name = "Buy Medkitebble for free",
+    Callback = function()
+        local args = {
+            [1] = "Medkitebble",
+            [2] = 0
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("BuySkin"):FireServer(unpack(args))
+    end,
+})
  
  
  
