@@ -278,6 +278,20 @@ local Button = aimbotTab:CreateButton({
 })
 
 
+local Button = aimbotTab:CreateButton({
+    Name = "Delete invisible walls",
+    Callback = function()
+        local currentMap = workspace:FindFirstChild("CurrentMap")
+        if currentMap then
+            local generatedBorders = currentMap:FindFirstChild("GeneratedBorders")
+            if generatedBorders then
+                generatedBorders:Destroy()
+            end
+        end
+    end,
+})
+
+
  
  
  
