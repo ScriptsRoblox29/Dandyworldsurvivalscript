@@ -504,7 +504,7 @@ local Button = aimbotTab:CreateButton({
 
 
 local Button = aimbotTab:CreateButton({
-    Name = "Buy Medkitebble for free",
+    Name = "Buy Medkitebble skin for free",
     Callback = function()
         local args = {
             [1] = "Medkitebble",
