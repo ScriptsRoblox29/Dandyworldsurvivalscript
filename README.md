@@ -420,7 +420,7 @@ local Button = aimbotTab:CreateButton({
 
 
 local Button = aimbotTab:CreateButton({
-    Name = "Heal all (click only once)",
+    Name = "Heal all (click only once!!)",
     Callback = function()
         local players = game:GetService("Players"):GetPlayers()
         local healedPlayers = {}
