@@ -525,6 +525,27 @@ local Button = aimbotTab:CreateButton({
         game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("BuySkin"):FireServer(unpack(args))
     end,
 })
+
+
+local Button = aimbotTab:CreateButton({
+    Name = "Heal All 2 (same warning with heal all)",
+    Callback = function()
+        local argsMorph = {
+            [1] = game:GetService("ReplicatedStorage"):WaitForChild("SkinsMorphs"):WaitForChild("Medkitebble")
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(unpack(argsMorph))
+
+        for _, player in pairs(game.Players:GetPlayers()) do
+            if player.Character then
+                local argsHeal = {
+                    [1] = player.Character:WaitForChild("HumanoidRootPart")
+                }
+                game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("HealAbility"):FireServer(unpack(argsHeal))
+            end
+        end
+    end,
+})
  
  
  local visualsTab = Window:CreateTab("Visuals", "crosshair")
