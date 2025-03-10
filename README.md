@@ -450,7 +450,7 @@ local Button = aimbotTab:CreateButton({
 
 
 local Button = aimbotTab:CreateButton({
-    Name = "Heal All forever (click only once or you will be kicked from the server)",
+    Name = "Heal All forever (click only once or you will be kicked from the server, again lol)",
     Callback = function()
         local players = game:GetService("Players"):GetPlayers()
         local healedPlayers = {}
