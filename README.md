@@ -327,6 +327,26 @@ local Button = aimbotTab:CreateButton({
 })
 
 
+local Button = aimbotTab:CreateButton({
+    Name = "use bandage even if you don't have one in your inventory",
+    Callback = function()
+        function getNil(name, class)
+            for _, v in next, getnilinstances() do
+                if v.ClassName == class and v.Name == name then
+                    return v
+                end
+            end
+        end
+
+        local args = {
+            [1] = getNil("Bandage", "Tool")
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("ItemRemote"):FireServer(unpack(args))
+    end,
+})
+
+
 
  
  
