@@ -420,7 +420,7 @@ local Button = aimbotTab:CreateButton({
 
 
 local Button = aimbotTab:CreateButton({
-    Name = "Heal all (click only once!!)",
+    Name = "Heal All (click only once or you will be kicked from the server)",
     Callback = function()
         local players = game:GetService("Players"):GetPlayers()
         local healedPlayers = {}
@@ -432,7 +432,7 @@ local Button = aimbotTab:CreateButton({
                 }
                 game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(unpack(args))
 
-                wait(0.5)
+                wait(0.1)
 
                 if player.Character then
                     local healArgs = {
@@ -442,12 +442,11 @@ local Button = aimbotTab:CreateButton({
                     healedPlayers[player] = true
                 end
 
-                wait(0.5)
+                wait(0.1)
             end
         end
     end,
 })
-
  
  
  
