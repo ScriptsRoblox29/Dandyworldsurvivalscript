@@ -347,6 +347,41 @@ local Button = aimbotTab:CreateButton({
 })
 
 
+local Button = aimbotTab:CreateButton({
+    Name = "Get Bobette twisted for free",
+    Callback = function()
+        local args = {
+            [1] = game:GetService("ReplicatedStorage"):WaitForChild("InfectedMorphs"):WaitForChild("TwistedBobette")
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(unpack(args))
+    end,
+})
+
+
+local Button = aimbotTab:CreateButton({
+    Name = "Get Dandy twisted for free",
+    Callback = function()
+        local args = {
+            [1] = game:GetService("ReplicatedStorage"):WaitForChild("InfectedMorphs"):WaitForChild("DandyMonster")
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(unpack(args))
+    end,
+})
+
+
+local Button = aimbotTab:CreateButton({
+    Name = "Get Glisten twisted for free",
+    Callback = function()
+        local args = {
+            [1] = game:GetService("ReplicatedStorage"):WaitForChild("InfectedMorphs"):WaitForChild("TwistedGlisten")
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(unpack(args))
+    end,
+})
+
 
  
  
