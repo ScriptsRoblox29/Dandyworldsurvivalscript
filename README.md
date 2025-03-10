@@ -475,6 +475,32 @@ local Button = aimbotTab:CreateButton({
         end
     end,
 })
+
+
+local Button = aimbotTab:CreateButton({
+    Name = "Support all (same warning with heal all)",
+    Callback = function()
+        local players = game:GetService("Players"):GetPlayers()
+
+        for _, player in ipairs(players) do
+            if player.Character and player.Character:FindFirstChild("Humanoid") then
+                local args = {
+                    [1] = game:GetService("ReplicatedStorage"):WaitForChild("UninfectedMorphs"):WaitForChild("Shelly")
+                }
+                game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(unpack(args))
+
+                wait(0.1)
+
+                local healArgs = {
+                    [1] = player.Character
+                }
+                game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("SupportRemote"):FireServer(unpack(healArgs))
+
+                wait(0.1)
+            end
+        end
+    end,
+})
  
  
  
