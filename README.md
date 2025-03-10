@@ -301,6 +301,19 @@ local Button = aimbotTab:CreateButton({
 })
 
 
+local Button = aimbotTab:CreateButton({
+    Name = "vote in Twisteds mode (I don't know how to say this)",
+    Callback = function()
+        local args = {
+            [1] = 2,
+            [2] = 1
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("AddVoteEvent"):FireServer(unpack(args))
+    end,
+})
+
+
  
  
  
