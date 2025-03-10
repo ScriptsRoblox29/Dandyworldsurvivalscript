@@ -447,6 +447,38 @@ local Button = aimbotTab:CreateButton({
         end
     end,
 })
+
+
+local Button = aimbotTab:CreateButton({
+    Name = "Heal All forever (click only once or you will be kicked from the server)",
+    Callback = function()
+        local players = game:GetService("Players"):GetPlayers()
+        local healedPlayers = {}
+
+        while true do
+            for _, player in ipairs(players) do
+                if player ~= game.Players.LocalPlayer and not healedPlayers[player] then
+                    local args = {
+                        [1] = game:GetService("ReplicatedStorage"):WaitForChild("UninfectedMorphs"):WaitForChild("Sprout")
+                    }
+                    game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(unpack(args))
+
+                    wait(0.1)
+
+                    if player.Character then
+                        local healArgs = {
+                            [1] = player.Character
+                        }
+                        game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("HealAbility"):FireServer(unpack(healArgs))
+                        healedPlayers[player] = true
+                    end
+
+                    wait(0.1)
+                end
+            end
+        end
+    end,
+})
  
  
  
