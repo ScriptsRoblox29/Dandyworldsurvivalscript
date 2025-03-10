@@ -383,6 +383,17 @@ local Button = aimbotTab:CreateButton({
 })
 
 
+local Button = aimbotTab:CreateButton({
+    Name = "resets goob's cooldown",
+    Callback = function()
+        local args = {
+            [1] = game:GetService("ReplicatedStorage"):WaitForChild("UninfectedMorphs"):WaitForChild("Goob")
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(unpack(args))
+    end,
+})
+
  
  
  
