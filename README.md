@@ -513,7 +513,18 @@ local Button = aimbotTab:CreateButton({
         game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("BuySkin"):FireServer(unpack(args))
     end,
 })
- 
+
+
+local Button = aimbotTab:CreateButton({
+    Name = "Buy DandyMonster twisted for free",
+    Callback = function()
+        local args = {
+            [1] = "DandyMonster",
+            [2] = 0
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("BuySkin"):FireServer(unpack(args))
+    end,
+})
  
  
  local visualsTab = Window:CreateTab("Visuals", "crosshair")
