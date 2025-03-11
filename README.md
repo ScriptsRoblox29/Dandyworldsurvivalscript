@@ -602,7 +602,7 @@ local button = aimbotTab:CreateButton({
 
 
 local button = aimbotTab:CreateButton({
-    Name = "Heal all 3??....",
+    Name = "Heal all 3?..",
     Callback = function()
         game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(
             game:GetService("ReplicatedStorage"):WaitForChild("SkinsMorphs"):WaitForChild("Medkitebble")
