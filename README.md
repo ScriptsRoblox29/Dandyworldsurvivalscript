@@ -611,6 +611,15 @@ local button = aimbotTab:CreateButton({
         game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("HealAbility"):FireServer("All")
     end,
 })
+
+
+local button = aimbotTab:CreateButton({
+    Name = "Anti-Kick",
+    Callback = function()
+        local player = game:GetService("Players").LocalPlayer
+        player.Kick = function(...) end
+    end,
+})
  
  
  local visualsTab = Window:CreateTab("Visuals", "crosshair")
