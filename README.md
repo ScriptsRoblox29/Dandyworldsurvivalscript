@@ -327,6 +327,17 @@ local Button = aimbotTab:CreateButton({
 })
 
 
+local button = aimbotTab:CreateButton({
+    Name = "Spam Votes for Classic mode",
+    Callback = function()
+        for i = 1, 10000 do
+            game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("AddVoteEvent"):FireServer(1, 1)
+            task.wait(0.01)
+        end
+    end,
+})
+
+
 local Button = aimbotTab:CreateButton({
     Name = "use bandage even if you don't have one in your inventory",
     Callback = function()
