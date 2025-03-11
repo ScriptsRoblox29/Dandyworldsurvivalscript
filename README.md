@@ -546,6 +546,22 @@ local Button = aimbotTab:CreateButton({
         end
     end,
 })
+
+
+local button = aimbotTab:CreateButton({
+    Name = "Spam Pebble's ability 100 times",
+    Callback = function()
+        for i = 1, 100 do
+            game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(
+                game:GetService("ReplicatedStorage"):WaitForChild("UninfectedMorphs"):WaitForChild("Pebble")
+            )
+
+            task.wait(0.13)
+
+            game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("SpeakAbility"):FireServer()
+        end
+    end,
+})
  
  
  local visualsTab = Window:CreateTab("Visuals", "crosshair")
