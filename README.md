@@ -653,7 +653,7 @@ local Input = aimbotTab:CreateInput({
 
 
 local button = aimbotTab:CreateButton({
-    Name = "Kill all Twisteds",
+    Name = "kill all Twisteds",
     Callback = function()
         local args = {
             [1] = game:GetService("ReplicatedStorage"):WaitForChild("UninfectedMorphs"):WaitForChild("StatsShrimpo")
@@ -679,6 +679,8 @@ local button = aimbotTab:CreateButton({
             end
 
             for _, twistedPlayer in pairs(twistedPlayers) do
+                task.wait(0.11)
+
                 game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("PunchAbility"):FireServer()
 
                 task.wait(0.12)
