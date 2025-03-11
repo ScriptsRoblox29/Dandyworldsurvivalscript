@@ -573,6 +573,19 @@ local button = aimbotTab:CreateButton({
         end
     end,
 })
+
+
+local button = aimbotTab:CreateButton({
+    Name = "Spam Tisha's ability 50 times",
+    Callback = function()
+        for i = 1, 50 do
+            game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(
+                game:GetService("ReplicatedStorage"):WaitForChild("UninfectedMorphs"):WaitForChild("Tisha")
+            )
+            game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("SpeakAbility"):FireServer()
+        end
+    end,
+})
  
  
  local visualsTab = Window:CreateTab("Visuals", "crosshair")
