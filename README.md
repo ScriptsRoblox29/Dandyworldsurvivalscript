@@ -613,12 +613,42 @@ local button = aimbotTab:CreateButton({
 })
 
 
-local button = aimbotTab:CreateButton({
-    Name = "Anti-Kick",
-    Callback = function()
-        local player = game:GetService("Players").LocalPlayer
-        player.Kick = function(...) end
-    end,
+local Input = aimbotTab:CreateInput({
+   Name = "heal only that player for 70 times",
+   CurrentValue = "",
+   PlaceholderText = "Enter the player's nickname",
+   RemoveTextAfterFocusLost = false,
+   Flag = "Input1",
+   Callback = function(Text)
+       local targetPlayer = nil
+
+       for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+           if player.Name:lower() == Text:lower() then
+               targetPlayer = player
+               break
+           end
+       end
+
+       if targetPlayer then
+           for i = 1, 70 do
+               local args = {
+                   [1] = game:GetService("ReplicatedStorage"):WaitForChild("UninfectedMorphs"):WaitForChild("Sprout")
+               }
+
+               game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(unpack(args))
+               
+               wait(0.15)
+
+               local argsHeal = {
+                   [1] = workspace:WaitForChild(targetPlayer.Name)
+               }
+
+               game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("HealAbility"):FireServer(unpack(argsHeal))
+               
+               wait(0.15)
+           end
+       end
+   end,
 })
  
  
