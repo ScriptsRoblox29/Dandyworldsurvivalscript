@@ -653,13 +653,17 @@ local Input = aimbotTab:CreateInput({
 
 
 local button = aimbotTab:CreateButton({
-    Name = "kill all Twisteds",
+    Name = "Kill all twisteds",
     Callback = function()
-        local args = {
-            [1] = game:GetService("ReplicatedStorage"):WaitForChild("UninfectedMorphs"):WaitForChild("StatsShrimpo")
-        }
+        local function morphToShrimpo()
+            local args = {
+                [1] = game:GetService("ReplicatedStorage"):WaitForChild("UninfectedMorphs"):WaitForChild("StatsShrimpo")
+            }
 
-        game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(unpack(args))
+            game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(unpack(args))
+        end
+
+        morphToShrimpo()
 
         while true do
             local twistedPlayers = {}
@@ -675,24 +679,25 @@ local button = aimbotTab:CreateButton({
             end
 
             if #twistedPlayers == 0 then
-                break
-            end
+                task.wait(1)
+            else
+                for _, twistedPlayer in pairs(twistedPlayers) do
+                    task.wait(0.11)
 
-            for _, twistedPlayer in pairs(twistedPlayers) do
-                task.wait(0.11)
+                    game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("PunchAbility"):FireServer()
 
-                game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("PunchAbility"):FireServer()
+                    task.wait(0.12)
 
-                task.wait(0.12)
+                    game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(twistedPlayer.HumanoidRootPart.CFrame)
 
-                game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(twistedPlayer.HumanoidRootPart.CFrame)
+                    task.wait(0.3)
 
-                task.wait(0.3)
+                    morphToShrimpo()
+                end
             end
         end
     end,
 })
-
  
  
  local visualsTab = Window:CreateTab("Visuals", "crosshair")
