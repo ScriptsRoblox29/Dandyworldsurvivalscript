@@ -338,6 +338,17 @@ local button = aimbotTab:CreateButton({
 })
 
 
+local button = aimbotTab:CreateButton({
+    Name = "Spam votes for Twisted mode",
+    Callback = function()
+        for i = 1, 10000000 do
+            game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("AddVoteEvent"):FireServer(2, 1)
+            task.wait(0.01)
+        end
+    end,
+})
+
+
 local Button = aimbotTab:CreateButton({
     Name = "use bandage even if you don't have one in your inventory",
     Callback = function()
