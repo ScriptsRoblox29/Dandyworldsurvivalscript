@@ -599,6 +599,18 @@ local button = aimbotTab:CreateButton({
         end
     end,
 })
+
+
+local button = aimbotTab:CreateButton({
+    Name = "Heal all 3??....",
+    Callback = function()
+        game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(
+            game:GetService("ReplicatedStorage"):WaitForChild("SkinsMorphs"):WaitForChild("Medkitebble")
+        )
+        task.wait(0.1)
+        game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("HealAbility"):FireServer("All")
+    end,
+})
  
  
  local visualsTab = Window:CreateTab("Visuals", "crosshair")
