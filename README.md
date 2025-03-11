@@ -576,7 +576,7 @@ local button = aimbotTab:CreateButton({
 
 
 local button = aimbotTab:CreateButton({
-    Name = "Spam tisha's ability 50 times",
+    Name = "Spam Tisha's ability 50 times",
     Callback = function()
         for i = 1, 50 do
             game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(
