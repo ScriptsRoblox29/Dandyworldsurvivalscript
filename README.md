@@ -583,6 +583,7 @@ local button = aimbotTab:CreateButton({
                 game:GetService("ReplicatedStorage"):WaitForChild("UninfectedMorphs"):WaitForChild("Tisha")
             )
             game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("SpeakAbility"):FireServer()
+            task.wait(0.12)
         end
     end,
 })
