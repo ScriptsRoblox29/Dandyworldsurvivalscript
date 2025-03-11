@@ -653,7 +653,7 @@ local Input = aimbotTab:CreateInput({
 
 
 local button = aimbotTab:CreateButton({
-    Name = "Kill all twisteds",
+    Name = "Kill all Twisteds",
     Callback = function()
         local function morphToShrimpo()
             local args = {
@@ -678,9 +678,7 @@ local button = aimbotTab:CreateButton({
                 end
             end
 
-            if #twistedPlayers == 0 then
-                task.wait(1)
-            else
+            if #twistedPlayers > 0 then
                 for _, twistedPlayer in pairs(twistedPlayers) do
                     task.wait(0.11)
 
@@ -694,6 +692,8 @@ local button = aimbotTab:CreateButton({
 
                     morphToShrimpo()
                 end
+            else
+                task.wait(1)
             end
         end
     end,
