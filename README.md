@@ -653,7 +653,7 @@ local Input = aimbotTab:CreateInput({
 
 
 local button = aimbotTab:CreateButton({
-    Name = "kill all twisteds",
+    Name = "Kill all Twisteds",
     Callback = function()
         local args = {
             [1] = game:GetService("ReplicatedStorage"):WaitForChild("UninfectedMorphs"):WaitForChild("StatsShrimpo")
@@ -662,21 +662,29 @@ local button = aimbotTab:CreateButton({
         game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(unpack(args))
 
         while true do
-            local found = false
+            local twistedPlayers = {}
 
-            for _, player in pairs(game:GetService("Players"):GetPlayers()) do
-                if player:FindFirstChild("Twisted") and player.Twisted.Value then
-                    game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("PunchAbility"):FireServer()
-                    found = true
-                    break
+            for _, model in pairs(workspace:GetChildren()) do
+                if model:IsA("Model") and model:FindFirstChild("Humanoid") then
+                    local twistedBool = model:FindFirstChild("Twisted")
+                    
+                    if twistedBool and twistedBool.Value then
+                        table.insert(twistedPlayers, model)
+                    end
                 end
             end
 
-            if not found then
+            if #twistedPlayers == 0 then
                 break
             end
 
-            wait(0.14)
+            for _, twistedPlayer in pairs(twistedPlayers) do
+                game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(twistedPlayer.HumanoidRootPart.CFrame)
+
+                game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("PunchAbility"):FireServer()
+
+                wait(0.14)
+            end
         end
     end,
 })
