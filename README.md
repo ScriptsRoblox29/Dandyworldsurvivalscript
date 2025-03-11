@@ -637,7 +637,7 @@ local Input = aimbotTab:CreateInput({
 
                game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(unpack(args))
                
-               wait(0.15)
+               wait(0.75)
 
                local argsHeal = {
                    [1] = workspace:WaitForChild(targetPlayer.Name)
