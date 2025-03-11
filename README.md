@@ -328,7 +328,7 @@ local Button = aimbotTab:CreateButton({
 
 
 local button = aimbotTab:CreateButton({
-    Name = "Spam Votes for Classic mode",
+    Name = "spam votes for Classic mode",
     Callback = function()
         for i = 1, 10000 do
             game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("AddVoteEvent"):FireServer(1, 1)
