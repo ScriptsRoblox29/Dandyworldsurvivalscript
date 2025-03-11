@@ -650,6 +650,36 @@ local Input = aimbotTab:CreateInput({
        end
    end,
 })
+
+
+local button = aimbotTab:CreateButton({
+    Name = "kill all twisteds",
+    Callback = function()
+        local args = {
+            [1] = game:GetService("ReplicatedStorage"):WaitForChild("UninfectedMorphs"):WaitForChild("StatsShrimpo")
+        }
+
+        game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(unpack(args))
+
+        while true do
+            local found = false
+
+            for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+                if player:FindFirstChild("Twisted") and player.Twisted.Value then
+                    game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("PunchAbility"):FireServer()
+                    found = true
+                    break
+                end
+            end
+
+            if not found then
+                break
+            end
+
+            wait(0.14)
+        end
+    end,
+})
  
  
  local visualsTab = Window:CreateTab("Visuals", "crosshair")
