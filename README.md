@@ -776,6 +776,15 @@ local Toggle = playerTab:CreateToggle({
         end
     end,
 })
+
+
+local creditsTab = Window:CreateTab("Credits", "crosshair")
+ 
+ local Section = visualsTab:CreateSection("nvm.")
+
+
+ local Label = creditsTab:CreateLabel("Creator of this script: isssacque1234 (from Roblox)", 4483362458, Color3.fromRGB(255, 255, 255), false) -- Title, Icon, Color, IgnoreTheme
+ 
  
  
  getgenv().speed = {
