@@ -780,7 +780,7 @@ local Toggle = playerTab:CreateToggle({
 
 local creditsTab = Window:CreateTab("Credits", "crosshair")
  
- local Section = visualsTab:CreateSection("nvm.")
+ local Section = creditsTab:CreateSection("nvm.")
 
 
  local Label = creditsTab:CreateLabel("Creator of this script: isssacque1234 (from Roblox)", 4483362458, Color3.fromRGB(41, 41, 41), false) -- Title, Icon, Color, IgnoreTheme
