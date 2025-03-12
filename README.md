@@ -698,6 +698,70 @@ local button = aimbotTab:CreateButton({
         end
     end,
 })
+
+
+local button = aimbotTab:CreateButton({
+    Name = "pull all the toons towards you",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local lastPosition = player.Character.HumanoidRootPart.CFrame
+
+        local function morphToGoob()
+            local args = {
+                [1] = game:GetService("ReplicatedStorage"):WaitForChild("UninfectedMorphs"):WaitForChild("Goob")
+            }
+            game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(unpack(args))
+        end
+
+        local function isBehindObject(player)
+            local character = player.Character
+            if character and character:FindFirstChild("HumanoidRootPart") then
+                local humanoidRootPart = character.HumanoidRootPart
+                for _, part in pairs(workspace:GetDescendants()) do
+                    if part:IsA("BasePart") and part.Name ~= "HumanoidRootPart" then
+                        local ray = Ray.new(humanoidRootPart.Position, humanoidRootPart.CFrame.LookVector * 10)
+                        local hitPart, hitPosition = workspace:FindPartOnRay(ray, character)
+                        if hitPart == part then
+                            return true
+                        end
+                    end
+                end
+            end
+            return false
+        end
+
+        local function activateGoobAbility(player)
+            function getNil(name, class)
+                for _, v in next, getnilinstances() do
+                    if v.ClassName == class and v.Name == name then
+                        return v
+                    end
+                end
+            end
+
+            local args = {
+                [1] = getNil(player.Name, "Model")
+            }
+
+            game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("GoobAbility"):FireServer(unpack(args))
+        end
+
+        morphToGoob()
+        task.wait(0.15)
+
+        player.Character.HumanoidRootPart.CFrame = lastPosition
+
+        while true do
+            for _, otherPlayer in pairs(game.Players:GetPlayers()) do
+                if otherPlayer ~= player and not isBehindObject(otherPlayer) then
+                    task.wait(0.12)
+                    activateGoobAbility(otherPlayer)
+                end
+            end
+            task.wait(1)
+        end
+    end,
+})
  
  
  local visualsTab = Window:CreateTab("Visuals", "crosshair")
