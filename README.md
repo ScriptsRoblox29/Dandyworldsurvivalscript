@@ -701,10 +701,10 @@ local button = aimbotTab:CreateButton({
 
 
 local button = aimbotTab:CreateButton({
-    Name = "pull all the toons towards you",
+    Name = "pull all the toons to you",
     Callback = function()
         local player = game.Players.LocalPlayer
-        local lastPosition = player.Character.HumanoidRootPart.CFrame
+        local lastPosition = player.Character and player.Character:FindFirstChild("HumanoidRootPart") and player.Character.HumanoidRootPart.CFrame
 
         local function morphToGoob()
             local args = {
@@ -713,14 +713,14 @@ local button = aimbotTab:CreateButton({
             game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("MorphEvent"):FireServer(unpack(args))
         end
 
-        local function isBehindObject(player)
-            local character = player.Character
+        local function isBehindObject(targetPlayer)
+            local character = targetPlayer.Character
             if character and character:FindFirstChild("HumanoidRootPart") then
                 local humanoidRootPart = character.HumanoidRootPart
                 for _, part in pairs(workspace:GetDescendants()) do
                     if part:IsA("BasePart") and part.Name ~= "HumanoidRootPart" then
                         local ray = Ray.new(humanoidRootPart.Position, humanoidRootPart.CFrame.LookVector * 10)
-                        local hitPart, hitPosition = workspace:FindPartOnRay(ray, character)
+                        local hitPart = workspace:FindPartOnRay(ray, character)
                         if hitPart == part then
                             return true
                         end
@@ -730,7 +730,7 @@ local button = aimbotTab:CreateButton({
             return false
         end
 
-        local function activateGoobAbility(player)
+        local function activateGoobAbility(targetPlayer)
             function getNil(name, class)
                 for _, v in next, getnilinstances() do
                     if v.ClassName == class and v.Name == name then
@@ -740,25 +740,30 @@ local button = aimbotTab:CreateButton({
             end
 
             local args = {
-                [1] = getNil(player.Name, "Model")
+                [1] = getNil(targetPlayer.Name, "Model")
             }
 
+            task.wait(0.10)
             game:GetService("ReplicatedStorage"):WaitForChild("GameRemotes"):WaitForChild("GoobAbility"):FireServer(unpack(args))
         end
 
         morphToGoob()
         task.wait(0.15)
 
-        player.Character.HumanoidRootPart.CFrame = lastPosition
+        if lastPosition then
+            player.Character.HumanoidRootPart.CFrame = lastPosition
+        end
 
         while true do
+            local foundPlayer = false
             for _, otherPlayer in pairs(game.Players:GetPlayers()) do
                 if otherPlayer ~= player and not isBehindObject(otherPlayer) then
-                    task.wait(0.12)
                     activateGoobAbility(otherPlayer)
+                    foundPlayer = true
                 end
             end
-            task.wait(1)
+            if not foundPlayer then break end
+            task.wait(0.12)
         end
     end,
 })
